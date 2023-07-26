@@ -130,3 +130,56 @@ func (list *List) DeleteLastNode() {
 	// Dispose of the tail node.
 	tail_node = nil
 }
+
+func (list *List) DeleteIntermidiateNode(position int) {
+	if list.head == nil {
+		fmt.Println("List empty")
+		return
+	}
+
+	if position == 1 {
+		temp_node := list.head
+		list.head = temp_node.next
+		temp_node = nil
+		return
+	}
+
+	// traverse the list until arriving at the position we want to delete
+	var count int = 1
+	var previous_node, position_node *Node = nil, list.head
+
+	for position_node != nil && count < position {
+		count++
+
+		previous_node = position_node
+		position_node = position_node.next
+	}
+
+	// check if the position node is nil, i.e at the end
+	if position_node == nil {
+		fmt.Println("Position does not exist")
+		return
+	}
+
+	// change the previous node’s next pointer to the next pointer of the node to be deleted.
+	previous_node.next = position_node.next
+
+	position_node = nil
+}
+
+func (list *List) DeleteAllNodes() {
+	var auxiliary_node, current_node *Node = nil, list.head
+
+	for current_node != nil {
+		auxiliary_node = current_node.next
+
+		// free the next pointer of the current node
+		current_node.next = nil
+
+		// assign auxiliary node to the current node
+		current_node = auxiliary_node
+	}
+
+	list.head = nil
+
+}

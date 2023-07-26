@@ -21,8 +21,13 @@ func main() {
 	singlylists.PrintList(singly_list) // prints 6 1 7 2 3 4 5
 
 	// deletion
-	singly_list.DeleteFirstNode()
-	singly_list.DeleteLastNode()
+	singly_list.DeleteFirstNode() // remains 1 7 2 3 4 5
+	singly_list.DeleteLastNode()  // remains 1 7 2 3 4
+	singly_list.DeleteIntermidiateNode(1)
 	fmt.Println("After Deletion List: ")
+	singlylists.PrintList(singly_list)
+
+	singly_list.DeleteAllNodes()
+	fmt.Println("After Deleting all Nodes: ")
 	singlylists.PrintList(singly_list)
 }
