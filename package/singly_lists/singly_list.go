@@ -20,11 +20,15 @@ func PrintList(l *List) {
 	fmt.Println()
 }
 
-/* List INsertion */
+/* Singly List Insertion */
 /*
 	• Inserting a new node before the head (at the beginning)
 	• Inserting a new node after the tail (at the end of the list)
 	• Inserting a new node at the middle of the list (random location)
+
+	Time Complexity: O(n), since, in the worst case, we may need to insert the node at the end of the list.
+
+	Space Complexity: O(1), for creating one temporary variable.
 */
 func (list *List) AddAtTheBeginning(value int) {
 	newNode := &Node{data: value}
@@ -79,4 +83,50 @@ func (list *List) AddInTheMiddle(value int, position int) { // position starts f
 
 	before_node.next = newNode
 	newNode.next = position_node
+}
+
+/*Singly List Deletion*/
+/*
+	• Deleting the first node
+	• Deleting the last node
+	• Deleting an intermediate node.
+*/
+
+func (list *List) DeleteFirstNode() {
+	if list.head == nil {
+		fmt.Println("List empty")
+		return
+	}
+
+	// Create a temporary node which will point to the same node as that of head.
+	temp_node := list.head
+
+	// Now, move the head nodes pointer to the next node of the temp node and dispose of the temporary node.
+	list.head = temp_node.next
+
+	temp_node = nil
+}
+
+func (list *List) DeleteLastNode() {
+	if list.head == nil {
+		fmt.Println("List empty")
+		return
+	}
+
+	/* Traverse the list and while traversing maintain the previous node address also. By
+	the time we reach the end of the list, we will have two pointers, one pointing to the
+	tail node and the other pointing to the node before the tail node. */
+	var previous_node, tail_node *Node = nil, list.head
+
+	for tail_node.next != nil {
+		previous_node = tail_node
+
+		tail_node = tail_node.next
+	}
+
+	// Update previous node’s next pointer with NULL.
+	previous_node.next = nil
+
+	// Dispose of the tail node.
+	tail_node = nil
 }
